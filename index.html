@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Next‑Level MCQ Practice</title>
+
+  <!-- Custom Animations -->
+  <style>
+    @keyframes floatUp { 0%{opacity:0; transform:translateY(20px);} 100%{opacity:1; transform:translateY(0);} }
+    @keyframes popIn { 0%{transform:scale(.8); opacity:0;} 100%{transform:scale(1); opacity:1;} }
+    .float-up { animation: floatUp .6s ease forwards; }
+    .pop-in { animation: popIn .4s ease forwards; }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white p-6"> 
+
+  <div class="max-w-3xl mx-auto mt-6 space-y-10 float-up">
+
+    <!-- Title -->
+    <h1 class="text-5xl font-extrabold text-center tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-cyan-400 drop-shadow-lg">
+      ⚡  Data Visulizatin</h1>
+
+    <!-- Questions Container -->
+    <div id="questions" class="space-y-8"></div>
+  </div>
+
+<script>
+  const data = [
+  {
+    "question": "Which symbol must every Excel formula begin with? (Version 1)",
+    "option1": "#",
+    "option2": "=",
+    "option3": "+",
+    "option4": "@",
+    "correct_answer": "option2",
+    "explanation": "All Excel formulas start with the equal sign."
+  },
+  {
+    "question": "Which function calculates the average of a range? (Version 2)",
+    "option1": "SUM",
+    "option2": "AVERAGE",
+    "option3": "COUNT",
+    "option4": "MEAN",
+    "correct_answer": "option2",
+    "explanation": "AVERAGE returns the mean of numbers."
+  },
+  {
+    "question": "Which function counts numeric cells only? (Version 3)",
+    "option1": "COUNTA",
+    "option2": "COUNT",
+    "option3": "COUNTBLANK",
+    "option4": "SUM",
+    "correct_answer": "option2",
+    "explanation": "COUNT counts only numeric data."
+  },
+  {
+    "question": "Which lookup function can search both left and right? (Version 4)",
+    "option1": "VLOOKUP",
+    "option2": "XLOOKUP",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option2",
+    "explanation": "XLOOKUP can search in any direction."
+  },
+  {
+    "question": "What does a PivotTable primarily do? (Version 5)",
+    "option1": "Formats cells",
+    "option2": "Summarizes and analyzes data",
+    "option3": "Creates macros",
+    "option4": "Converts text",
+    "correct_answer": "option2",
+    "explanation": "PivotTables summarize large datasets."
+  },
+  {
+    "question": "Which chart best shows data proportions? (Version 6)",
+    "option1": "Line Chart",
+    "option2": "Pie Chart",
+    "option3": "Scatter Chart",
+    "option4": "Column Chart",
+    "correct_answer": "option2",
+    "explanation": "Pie charts visualize parts of a whole."
+  },
+  {
+    "question": "Which tool provides regression analysis in Excel? (Version 7)",
+    "option1": "Solver",
+    "option2": "Data Analysis ToolPak",
+    "option3": "Power Query",
+    "option4": "Flash Fill",
+    "correct_answer": "option2",
+    "explanation": "Regression is available inside ToolPak."
+  },
+  {
+    "question": "Correlation values always range between: (Version 8)",
+    "option1": "0 to 1",
+    "option2": "-1 to +1",
+    "option3": "-10 to +10",
+    "option4": "1 to 10",
+    "correct_answer": "option2",
+    "explanation": "Correlation coefficients range from -1 to +1."
+  },
+  {
+    "question": "Which operator is used to join text? (Version 9)",
+    "option1": "&",
+    "option2": "*",
+    "option3": "+",
+    "option4": "/",
+    "correct_answer": "option1",
+    "explanation": "The ampersand concatenates text."
+  },
+  {
+    "question": "Which function returns the current date? (Version 10)",
+    "option1": "DATE",
+    "option2": "TODAY",
+    "option3": "NOW",
+    "option4": "DAY",
+    "correct_answer": "option2",
+    "explanation": "TODAY returns the current system date."
+  },
+  {
+    "question": "Which function extracts a specific number of characters from the left? (Version 11)",
+    "option1": "RIGHT",
+    "option2": "LEFT",
+    "option3": "MID",
+    "option4": "CUT",
+    "correct_answer": "option2",
+    "explanation": "LEFT extracts characters from the left side."
+  },
+  {
+    "question": "Which chart is best for showing trends over time? (Version 12)",
+    "option1": "Pie Chart",
+    "option2": "Line Chart",
+    "option3": "Bar Chart",
+    "option4": "Scatter Chart",
+    "correct_answer": "option2",
+    "explanation": "Line charts best show trends over time."
+  },
+  {
+    "question": "What does the MATCH function return? (Version 13)",
+    "option1": "Cell value",
+    "option2": "Position of a value",
+    "option3": "Formatted text",
+    "option4": "Chart title",
+    "correct_answer": "option2",
+    "explanation": "MATCH returns the position of a value in a range."
+  },
+  {
+    "question": "Regression analysis predicts: (Version 14)",
+    "option1": "File size",
+    "option2": "Dependent variable behavior",
+    "option3": "Sheet color",
+    "option4": "Pivot formatting",
+    "correct_answer": "option2",
+    "explanation": "Regression predicts Y using X variables."
+  },
+  {
+    "question": "R-squared value indicates: (Version 15)",
+    "option1": "Model accuracy",
+    "option2": "Cell formatting",
+    "option3": "Pivot refresh time",
+    "option4": "Worksheet count",
+    "correct_answer": "option1",
+    "explanation": "R\u00b2 measures how well regression fits the data."
+  },
+  {
+    "question": "Which function removes extra spaces? (Version 16)",
+    "option1": "CLEAN",
+    "option2": "TRIM",
+    "option3": "MID",
+    "option4": "SPACE",
+    "correct_answer": "option2",
+    "explanation": "TRIM removes extra spaces except single spaces."
+  },
+  {
+    "question": "Which ToolPak option generates summary statistics? (Version 17)",
+    "option1": "Histogram",
+    "option2": "Descriptive Statistics",
+    "option3": "ANOVA",
+    "option4": "Regression",
+    "correct_answer": "option2",
+    "explanation": "Descriptive Statistics provides mean, SD, etc."
+  },
+  {
+    "question": "Which feature allows grouping dates into months in PivotTables? (Version 18)",
+    "option1": "Sort",
+    "option2": "Group Field",
+    "option3": "Slicer",
+    "option4": "Filter",
+    "correct_answer": "option2",
+    "explanation": "Group Field allows grouping by time periods."
+  },
+  {
+    "question": "Standard deviation measures: (Version 19)",
+    "option1": "Central value",
+    "option2": "Data spread",
+    "option3": "Correlation strength",
+    "option4": "Cell format",
+    "correct_answer": "option2",
+    "explanation": "It measures variability in data."
+  },
+  {
+    "question": "Which is a horizontal lookup function? (Version 20)",
+    "option1": "VLOOKUP",
+    "option2": "INDEX",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option3",
+    "explanation": "HLOOKUP searches across rows horizontally."
+  },
+  {
+    "question": "Which symbol must every Excel formula begin with? (Version 21)",
+    "option1": "#",
+    "option2": "=",
+    "option3": "+",
+    "option4": "@",
+    "correct_answer": "option2",
+    "explanation": "All Excel formulas start with the equal sign."
+  },
+  {
+    "question": "Which function calculates the average of a range? (Version 22)",
+    "option1": "SUM",
+    "option2": "AVERAGE",
+    "option3": "COUNT",
+    "option4": "MEAN",
+    "correct_answer": "option2",
+    "explanation": "AVERAGE returns the mean of numbers."
+  },
+  {
+    "question": "Which function counts numeric cells only? (Version 23)",
+    "option1": "COUNTA",
+    "option2": "COUNT",
+    "option3": "COUNTBLANK",
+    "option4": "SUM",
+    "correct_answer": "option2",
+    "explanation": "COUNT counts only numeric data."
+  },
+  {
+    "question": "Which lookup function can search both left and right? (Version 24)",
+    "option1": "VLOOKUP",
+    "option2": "XLOOKUP",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option2",
+    "explanation": "XLOOKUP can search in any direction."
+  },
+  {
+    "question": "What does a PivotTable primarily do? (Version 25)",
+    "option1": "Formats cells",
+    "option2": "Summarizes and analyzes data",
+    "option3": "Creates macros",
+    "option4": "Converts text",
+    "correct_answer": "option2",
+    "explanation": "PivotTables summarize large datasets."
+  },
+  {
+    "question": "Which chart best shows data proportions? (Version 26)",
+    "option1": "Line Chart",
+    "option2": "Pie Chart",
+    "option3": "Scatter Chart",
+    "option4": "Column Chart",
+    "correct_answer": "option2",
+    "explanation": "Pie charts visualize parts of a whole."
+  },
+  {
+    "question": "Which tool provides regression analysis in Excel? (Version 27)",
+    "option1": "Solver",
+    "option2": "Data Analysis ToolPak",
+    "option3": "Power Query",
+    "option4": "Flash Fill",
+    "correct_answer": "option2",
+    "explanation": "Regression is available inside ToolPak."
+  },
+  {
+    "question": "Correlation values always range between: (Version 28)",
+    "option1": "0 to 1",
+    "option2": "-1 to +1",
+    "option3": "-10 to +10",
+    "option4": "1 to 10",
+    "correct_answer": "option2",
+    "explanation": "Correlation coefficients range from -1 to +1."
+  },
+  {
+    "question": "Which operator is used to join text? (Version 29)",
+    "option1": "&",
+    "option2": "*",
+    "option3": "+",
+    "option4": "/",
+    "correct_answer": "option1",
+    "explanation": "The ampersand concatenates text."
+  },
+  {
+    "question": "Which function returns the current date? (Version 30)",
+    "option1": "DATE",
+    "option2": "TODAY",
+    "option3": "NOW",
+    "option4": "DAY",
+    "correct_answer": "option2",
+    "explanation": "TODAY returns the current system date."
+  },
+  {
+    "question": "Which function extracts a specific number of characters from the left? (Version 31)",
+    "option1": "RIGHT",
+    "option2": "LEFT",
+    "option3": "MID",
+    "option4": "CUT",
+    "correct_answer": "option2",
+    "explanation": "LEFT extracts characters from the left side."
+  },
+  {
+    "question": "Which chart is best for showing trends over time? (Version 32)",
+    "option1": "Pie Chart",
+    "option2": "Line Chart",
+    "option3": "Bar Chart",
+    "option4": "Scatter Chart",
+    "correct_answer": "option2",
+    "explanation": "Line charts best show trends over time."
+  },
+  {
+    "question": "What does the MATCH function return? (Version 33)",
+    "option1": "Cell value",
+    "option2": "Position of a value",
+    "option3": "Formatted text",
+    "option4": "Chart title",
+    "correct_answer": "option2",
+    "explanation": "MATCH returns the position of a value in a range."
+  },
+  {
+    "question": "Regression analysis predicts: (Version 34)",
+    "option1": "File size",
+    "option2": "Dependent variable behavior",
+    "option3": "Sheet color",
+    "option4": "Pivot formatting",
+    "correct_answer": "option2",
+    "explanation": "Regression predicts Y using X variables."
+  },
+  {
+    "question": "R-squared value indicates: (Version 35)",
+    "option1": "Model accuracy",
+    "option2": "Cell formatting",
+    "option3": "Pivot refresh time",
+    "option4": "Worksheet count",
+    "correct_answer": "option1",
+    "explanation": "R\u00b2 measures how well regression fits the data."
+  },
+  {
+    "question": "Which function removes extra spaces? (Version 36)",
+    "option1": "CLEAN",
+    "option2": "TRIM",
+    "option3": "MID",
+    "option4": "SPACE",
+    "correct_answer": "option2",
+    "explanation": "TRIM removes extra spaces except single spaces."
+  },
+  {
+    "question": "Which ToolPak option generates summary statistics? (Version 37)",
+    "option1": "Histogram",
+    "option2": "Descriptive Statistics",
+    "option3": "ANOVA",
+    "option4": "Regression",
+    "correct_answer": "option2",
+    "explanation": "Descriptive Statistics provides mean, SD, etc."
+  },
+  {
+    "question": "Which feature allows grouping dates into months in PivotTables? (Version 38)",
+    "option1": "Sort",
+    "option2": "Group Field",
+    "option3": "Slicer",
+    "option4": "Filter",
+    "correct_answer": "option2",
+    "explanation": "Group Field allows grouping by time periods."
+  },
+  {
+    "question": "Standard deviation measures: (Version 39)",
+    "option1": "Central value",
+    "option2": "Data spread",
+    "option3": "Correlation strength",
+    "option4": "Cell format",
+    "correct_answer": "option2",
+    "explanation": "It measures variability in data."
+  },
+  {
+    "question": "Which is a horizontal lookup function? (Version 40)",
+    "option1": "VLOOKUP",
+    "option2": "INDEX",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option3",
+    "explanation": "HLOOKUP searches across rows horizontally."
+  },
+  {
+    "question": "Which symbol must every Excel formula begin with? (Version 41)",
+    "option1": "#",
+    "option2": "=",
+    "option3": "+",
+    "option4": "@",
+    "correct_answer": "option2",
+    "explanation": "All Excel formulas start with the equal sign."
+  },
+  {
+    "question": "Which function calculates the average of a range? (Version 42)",
+    "option1": "SUM",
+    "option2": "AVERAGE",
+    "option3": "COUNT",
+    "option4": "MEAN",
+    "correct_answer": "option2",
+    "explanation": "AVERAGE returns the mean of numbers."
+  },
+  {
+    "question": "Which function counts numeric cells only? (Version 43)",
+    "option1": "COUNTA",
+    "option2": "COUNT",
+    "option3": "COUNTBLANK",
+    "option4": "SUM",
+    "correct_answer": "option2",
+    "explanation": "COUNT counts only numeric data."
+  },
+  {
+    "question": "Which lookup function can search both left and right? (Version 44)",
+    "option1": "VLOOKUP",
+    "option2": "XLOOKUP",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option2",
+    "explanation": "XLOOKUP can search in any direction."
+  },
+  {
+    "question": "What does a PivotTable primarily do? (Version 45)",
+    "option1": "Formats cells",
+    "option2": "Summarizes and analyzes data",
+    "option3": "Creates macros",
+    "option4": "Converts text",
+    "correct_answer": "option2",
+    "explanation": "PivotTables summarize large datasets."
+  },
+  {
+    "question": "Which chart best shows data proportions? (Version 46)",
+    "option1": "Line Chart",
+    "option2": "Pie Chart",
+    "option3": "Scatter Chart",
+    "option4": "Column Chart",
+    "correct_answer": "option2",
+    "explanation": "Pie charts visualize parts of a whole."
+  },
+  {
+    "question": "Which tool provides regression analysis in Excel? (Version 47)",
+    "option1": "Solver",
+    "option2": "Data Analysis ToolPak",
+    "option3": "Power Query",
+    "option4": "Flash Fill",
+    "correct_answer": "option2",
+    "explanation": "Regression is available inside ToolPak."
+  },
+  {
+    "question": "Correlation values always range between: (Version 48)",
+    "option1": "0 to 1",
+    "option2": "-1 to +1",
+    "option3": "-10 to +10",
+    "option4": "1 to 10",
+    "correct_answer": "option2",
+    "explanation": "Correlation coefficients range from -1 to +1."
+  },
+  {
+    "question": "Which operator is used to join text? (Version 49)",
+    "option1": "&",
+    "option2": "*",
+    "option3": "+",
+    "option4": "/",
+    "correct_answer": "option1",
+    "explanation": "The ampersand concatenates text."
+  },
+  {
+    "question": "Which function returns the current date? (Version 50)",
+    "option1": "DATE",
+    "option2": "TODAY",
+    "option3": "NOW",
+    "option4": "DAY",
+    "correct_answer": "option2",
+    "explanation": "TODAY returns the current system date."
+  },
+  {
+    "question": "Which function extracts a specific number of characters from the left? (Version 51)",
+    "option1": "RIGHT",
+    "option2": "LEFT",
+    "option3": "MID",
+    "option4": "CUT",
+    "correct_answer": "option2",
+    "explanation": "LEFT extracts characters from the left side."
+  },
+  {
+    "question": "Which chart is best for showing trends over time? (Version 52)",
+    "option1": "Pie Chart",
+    "option2": "Line Chart",
+    "option3": "Bar Chart",
+    "option4": "Scatter Chart",
+    "correct_answer": "option2",
+    "explanation": "Line charts best show trends over time."
+  },
+  {
+    "question": "What does the MATCH function return? (Version 53)",
+    "option1": "Cell value",
+    "option2": "Position of a value",
+    "option3": "Formatted text",
+    "option4": "Chart title",
+    "correct_answer": "option2",
+    "explanation": "MATCH returns the position of a value in a range."
+  },
+  {
+    "question": "Regression analysis predicts: (Version 54)",
+    "option1": "File size",
+    "option2": "Dependent variable behavior",
+    "option3": "Sheet color",
+    "option4": "Pivot formatting",
+    "correct_answer": "option2",
+    "explanation": "Regression predicts Y using X variables."
+  },
+  {
+    "question": "R-squared value indicates: (Version 55)",
+    "option1": "Model accuracy",
+    "option2": "Cell formatting",
+    "option3": "Pivot refresh time",
+    "option4": "Worksheet count",
+    "correct_answer": "option1",
+    "explanation": "R\u00b2 measures how well regression fits the data."
+  },
+  {
+    "question": "Which function removes extra spaces? (Version 56)",
+    "option1": "CLEAN",
+    "option2": "TRIM",
+    "option3": "MID",
+    "option4": "SPACE",
+    "correct_answer": "option2",
+    "explanation": "TRIM removes extra spaces except single spaces."
+  },
+  {
+    "question": "Which ToolPak option generates summary statistics? (Version 57)",
+    "option1": "Histogram",
+    "option2": "Descriptive Statistics",
+    "option3": "ANOVA",
+    "option4": "Regression",
+    "correct_answer": "option2",
+    "explanation": "Descriptive Statistics provides mean, SD, etc."
+  },
+  {
+    "question": "Which feature allows grouping dates into months in PivotTables? (Version 58)",
+    "option1": "Sort",
+    "option2": "Group Field",
+    "option3": "Slicer",
+    "option4": "Filter",
+    "correct_answer": "option2",
+    "explanation": "Group Field allows grouping by time periods."
+  },
+  {
+    "question": "Standard deviation measures: (Version 59)",
+    "option1": "Central value",
+    "option2": "Data spread",
+    "option3": "Correlation strength",
+    "option4": "Cell format",
+    "correct_answer": "option2",
+    "explanation": "It measures variability in data."
+  },
+  {
+    "question": "Which is a horizontal lookup function? (Version 60)",
+    "option1": "VLOOKUP",
+    "option2": "INDEX",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option3",
+    "explanation": "HLOOKUP searches across rows horizontally."
+  },
+  {
+    "question": "Which symbol must every Excel formula begin with? (Version 61)",
+    "option1": "#",
+    "option2": "=",
+    "option3": "+",
+    "option4": "@",
+    "correct_answer": "option2",
+    "explanation": "All Excel formulas start with the equal sign."
+  },
+  {
+    "question": "Which function calculates the average of a range? (Version 62)",
+    "option1": "SUM",
+    "option2": "AVERAGE",
+    "option3": "COUNT",
+    "option4": "MEAN",
+    "correct_answer": "option2",
+    "explanation": "AVERAGE returns the mean of numbers."
+  },
+  {
+    "question": "Which function counts numeric cells only? (Version 63)",
+    "option1": "COUNTA",
+    "option2": "COUNT",
+    "option3": "COUNTBLANK",
+    "option4": "SUM",
+    "correct_answer": "option2",
+    "explanation": "COUNT counts only numeric data."
+  },
+  {
+    "question": "Which lookup function can search both left and right? (Version 64)",
+    "option1": "VLOOKUP",
+    "option2": "XLOOKUP",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option2",
+    "explanation": "XLOOKUP can search in any direction."
+  },
+  {
+    "question": "What does a PivotTable primarily do? (Version 65)",
+    "option1": "Formats cells",
+    "option2": "Summarizes and analyzes data",
+    "option3": "Creates macros",
+    "option4": "Converts text",
+    "correct_answer": "option2",
+    "explanation": "PivotTables summarize large datasets."
+  },
+  {
+    "question": "Which chart best shows data proportions? (Version 66)",
+    "option1": "Line Chart",
+    "option2": "Pie Chart",
+    "option3": "Scatter Chart",
+    "option4": "Column Chart",
+    "correct_answer": "option2",
+    "explanation": "Pie charts visualize parts of a whole."
+  },
+  {
+    "question": "Which tool provides regression analysis in Excel? (Version 67)",
+    "option1": "Solver",
+    "option2": "Data Analysis ToolPak",
+    "option3": "Power Query",
+    "option4": "Flash Fill",
+    "correct_answer": "option2",
+    "explanation": "Regression is available inside ToolPak."
+  },
+  {
+    "question": "Correlation values always range between: (Version 68)",
+    "option1": "0 to 1",
+    "option2": "-1 to +1",
+    "option3": "-10 to +10",
+    "option4": "1 to 10",
+    "correct_answer": "option2",
+    "explanation": "Correlation coefficients range from -1 to +1."
+  },
+  {
+    "question": "Which operator is used to join text? (Version 69)",
+    "option1": "&",
+    "option2": "*",
+    "option3": "+",
+    "option4": "/",
+    "correct_answer": "option1",
+    "explanation": "The ampersand concatenates text."
+  },
+  {
+    "question": "Which function returns the current date? (Version 70)",
+    "option1": "DATE",
+    "option2": "TODAY",
+    "option3": "NOW",
+    "option4": "DAY",
+    "correct_answer": "option2",
+    "explanation": "TODAY returns the current system date."
+  },
+  {
+    "question": "Which function extracts a specific number of characters from the left? (Version 71)",
+    "option1": "RIGHT",
+    "option2": "LEFT",
+    "option3": "MID",
+    "option4": "CUT",
+    "correct_answer": "option2",
+    "explanation": "LEFT extracts characters from the left side."
+  },
+  {
+    "question": "Which chart is best for showing trends over time? (Version 72)",
+    "option1": "Pie Chart",
+    "option2": "Line Chart",
+    "option3": "Bar Chart",
+    "option4": "Scatter Chart",
+    "correct_answer": "option2",
+    "explanation": "Line charts best show trends over time."
+  },
+  {
+    "question": "What does the MATCH function return? (Version 73)",
+    "option1": "Cell value",
+    "option2": "Position of a value",
+    "option3": "Formatted text",
+    "option4": "Chart title",
+    "correct_answer": "option2",
+    "explanation": "MATCH returns the position of a value in a range."
+  },
+  {
+    "question": "Regression analysis predicts: (Version 74)",
+    "option1": "File size",
+    "option2": "Dependent variable behavior",
+    "option3": "Sheet color",
+    "option4": "Pivot formatting",
+    "correct_answer": "option2",
+    "explanation": "Regression predicts Y using X variables."
+  },
+  {
+    "question": "R-squared value indicates: (Version 75)",
+    "option1": "Model accuracy",
+    "option2": "Cell formatting",
+    "option3": "Pivot refresh time",
+    "option4": "Worksheet count",
+    "correct_answer": "option1",
+    "explanation": "R\u00b2 measures how well regression fits the data."
+  },
+  {
+    "question": "Which function removes extra spaces? (Version 76)",
+    "option1": "CLEAN",
+    "option2": "TRIM",
+    "option3": "MID",
+    "option4": "SPACE",
+    "correct_answer": "option2",
+    "explanation": "TRIM removes extra spaces except single spaces."
+  },
+  {
+    "question": "Which ToolPak option generates summary statistics? (Version 77)",
+    "option1": "Histogram",
+    "option2": "Descriptive Statistics",
+    "option3": "ANOVA",
+    "option4": "Regression",
+    "correct_answer": "option2",
+    "explanation": "Descriptive Statistics provides mean, SD, etc."
+  },
+  {
+    "question": "Which feature allows grouping dates into months in PivotTables? (Version 78)",
+    "option1": "Sort",
+    "option2": "Group Field",
+    "option3": "Slicer",
+    "option4": "Filter",
+    "correct_answer": "option2",
+    "explanation": "Group Field allows grouping by time periods."
+  },
+  {
+    "question": "Standard deviation measures: (Version 79)",
+    "option1": "Central value",
+    "option2": "Data spread",
+    "option3": "Correlation strength",
+    "option4": "Cell format",
+    "correct_answer": "option2",
+    "explanation": "It measures variability in data."
+  },
+  {
+    "question": "Which is a horizontal lookup function? (Version 80)",
+    "option1": "VLOOKUP",
+    "option2": "INDEX",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option3",
+    "explanation": "HLOOKUP searches across rows horizontally."
+  },
+  {
+    "question": "Which symbol must every Excel formula begin with? (Version 81)",
+    "option1": "#",
+    "option2": "=",
+    "option3": "+",
+    "option4": "@",
+    "correct_answer": "option2",
+    "explanation": "All Excel formulas start with the equal sign."
+  },
+  {
+    "question": "Which function calculates the average of a range? (Version 82)",
+    "option1": "SUM",
+    "option2": "AVERAGE",
+    "option3": "COUNT",
+    "option4": "MEAN",
+    "correct_answer": "option2",
+    "explanation": "AVERAGE returns the mean of numbers."
+  },
+  {
+    "question": "Which function counts numeric cells only? (Version 83)",
+    "option1": "COUNTA",
+    "option2": "COUNT",
+    "option3": "COUNTBLANK",
+    "option4": "SUM",
+    "correct_answer": "option2",
+    "explanation": "COUNT counts only numeric data."
+  },
+  {
+    "question": "Which lookup function can search both left and right? (Version 84)",
+    "option1": "VLOOKUP",
+    "option2": "XLOOKUP",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option2",
+    "explanation": "XLOOKUP can search in any direction."
+  },
+  {
+    "question": "What does a PivotTable primarily do? (Version 85)",
+    "option1": "Formats cells",
+    "option2": "Summarizes and analyzes data",
+    "option3": "Creates macros",
+    "option4": "Converts text",
+    "correct_answer": "option2",
+    "explanation": "PivotTables summarize large datasets."
+  },
+  {
+    "question": "Which chart best shows data proportions? (Version 86)",
+    "option1": "Line Chart",
+    "option2": "Pie Chart",
+    "option3": "Scatter Chart",
+    "option4": "Column Chart",
+    "correct_answer": "option2",
+    "explanation": "Pie charts visualize parts of a whole."
+  },
+  {
+    "question": "Which tool provides regression analysis in Excel? (Version 87)",
+    "option1": "Solver",
+    "option2": "Data Analysis ToolPak",
+    "option3": "Power Query",
+    "option4": "Flash Fill",
+    "correct_answer": "option2",
+    "explanation": "Regression is available inside ToolPak."
+  },
+  {
+    "question": "Correlation values always range between: (Version 88)",
+    "option1": "0 to 1",
+    "option2": "-1 to +1",
+    "option3": "-10 to +10",
+    "option4": "1 to 10",
+    "correct_answer": "option2",
+    "explanation": "Correlation coefficients range from -1 to +1."
+  },
+  {
+    "question": "Which operator is used to join text? (Version 89)",
+    "option1": "&",
+    "option2": "*",
+    "option3": "+",
+    "option4": "/",
+    "correct_answer": "option1",
+    "explanation": "The ampersand concatenates text."
+  },
+  {
+    "question": "Which function returns the current date? (Version 90)",
+    "option1": "DATE",
+    "option2": "TODAY",
+    "option3": "NOW",
+    "option4": "DAY",
+    "correct_answer": "option2",
+    "explanation": "TODAY returns the current system date."
+  },
+  {
+    "question": "Which function extracts a specific number of characters from the left? (Version 91)",
+    "option1": "RIGHT",
+    "option2": "LEFT",
+    "option3": "MID",
+    "option4": "CUT",
+    "correct_answer": "option2",
+    "explanation": "LEFT extracts characters from the left side."
+  },
+  {
+    "question": "Which chart is best for showing trends over time? (Version 92)",
+    "option1": "Pie Chart",
+    "option2": "Line Chart",
+    "option3": "Bar Chart",
+    "option4": "Scatter Chart",
+    "correct_answer": "option2",
+    "explanation": "Line charts best show trends over time."
+  },
+  {
+    "question": "What does the MATCH function return? (Version 93)",
+    "option1": "Cell value",
+    "option2": "Position of a value",
+    "option3": "Formatted text",
+    "option4": "Chart title",
+    "correct_answer": "option2",
+    "explanation": "MATCH returns the position of a value in a range."
+  },
+  {
+    "question": "Regression analysis predicts: (Version 94)",
+    "option1": "File size",
+    "option2": "Dependent variable behavior",
+    "option3": "Sheet color",
+    "option4": "Pivot formatting",
+    "correct_answer": "option2",
+    "explanation": "Regression predicts Y using X variables."
+  },
+  {
+    "question": "R-squared value indicates: (Version 95)",
+    "option1": "Model accuracy",
+    "option2": "Cell formatting",
+    "option3": "Pivot refresh time",
+    "option4": "Worksheet count",
+    "correct_answer": "option1",
+    "explanation": "R\u00b2 measures how well regression fits the data."
+  },
+  {
+    "question": "Which function removes extra spaces? (Version 96)",
+    "option1": "CLEAN",
+    "option2": "TRIM",
+    "option3": "MID",
+    "option4": "SPACE",
+    "correct_answer": "option2",
+    "explanation": "TRIM removes extra spaces except single spaces."
+  },
+  {
+    "question": "Which ToolPak option generates summary statistics? (Version 97)",
+    "option1": "Histogram",
+    "option2": "Descriptive Statistics",
+    "option3": "ANOVA",
+    "option4": "Regression",
+    "correct_answer": "option2",
+    "explanation": "Descriptive Statistics provides mean, SD, etc."
+  },
+  {
+    "question": "Which feature allows grouping dates into months in PivotTables? (Version 98)",
+    "option1": "Sort",
+    "option2": "Group Field",
+    "option3": "Slicer",
+    "option4": "Filter",
+    "correct_answer": "option2",
+    "explanation": "Group Field allows grouping by time periods."
+  },
+  {
+    "question": "Standard deviation measures: (Version 99)",
+    "option1": "Central value",
+    "option2": "Data spread",
+    "option3": "Correlation strength",
+    "option4": "Cell format",
+    "correct_answer": "option2",
+    "explanation": "It measures variability in data."
+  },
+  {
+    "question": "Which is a horizontal lookup function? (Version 100)",
+    "option1": "VLOOKUP",
+    "option2": "INDEX",
+    "option3": "HLOOKUP",
+    "option4": "MATCH",
+    "correct_answer": "option3",
+    "explanation": "HLOOKUP searches across rows horizontally."
+  },
+  {
+    "question": "What does the SUM function do in Excel? (Set2-Q1)",
+    "option1": "Counts numbers",
+    "option2": "Adds numbers",
+    "option3": "Averages numbers",
+    "option4": "Sorts numbers",
+    "correct_answer": "option2",
+    "explanation": "SUM adds a range of numbers."
+  },
+  {
+    "question": "Which function counts non-empty cells? (Set2-Q2)",
+    "option1": "COUNTBLANK",
+    "option2": "COUNT",
+    "option3": "COUNTA",
+    "option4": "AVERAGE",
+    "correct_answer": "option3",
+    "explanation": "COUNTA counts all non-empty cells."
+  },
+  {
+    "question": "What does the MID function do? (Set2-Q3)",
+    "option1": "Extracts characters from the start",
+    "option2": "Extracts characters from the middle",
+    "option3": "Extracts characters from the end",
+    "option4": "Converts text to uppercase",
+    "correct_answer": "option2",
+    "explanation": "MID extracts characters starting at a specific point."
+  },
+  {
+    "question": "Which function returns the number of characters in text? (Set2-Q4)",
+    "option1": "LENGTH",
+    "option2": "COUNT",
+    "option3": "LEN",
+    "option4": "TRIM",
+    "correct_answer": "option3",
+    "explanation": "LEN returns the total character count."
+  },
+  {
+    "question": "Which function checks multiple conditions and returns TRUE only if all conditions are met? (Set2-Q5)",
+    "option1": "OR",
+    "option2": "AND",
+    "option3": "NOT",
+    "option4": "XOR",
+    "correct_answer": "option2",
+    "explanation": "AND returns TRUE only when all conditions are TRUE."
+  },
+  {
+    "question": "Which lookup function searches horizontally? (Set2-Q6)",
+    "option1": "VLOOKUP",
+    "option2": "HLOOKUP",
+    "option3": "INDEX",
+    "option4": "MATCH",
+    "correct_answer": "option2",
+    "explanation": "HLOOKUP searches across rows."
+  },
+  {
+    "question": "What does INDEX return? (Set2-Q7)",
+    "option1": "A cell\u2019s position",
+    "option2": "A cell\u2019s value",
+    "option3": "A range address",
+    "option4": "A formula result",
+    "correct_answer": "option2",
+    "explanation": "INDEX returns the value at a given row/column."
+  },
+  {
+    "question": "A PivotChart is based on: (Set2-Q8)",
+    "option1": "A PivotTable",
+    "option2": "Conditional formatting",
+    "option3": "Macros",
+    "option4": "Named range",
+    "correct_answer": "option1",
+    "explanation": "PivotCharts visualize data from PivotTables."
+  },
+  {
+    "question": "Which tool lets you filter PivotTables visually? (Set2-Q9)",
+    "option1": "Slicer",
+    "option2": "Ribbon",
+    "option3": "Status bar",
+    "option4": "Formula bar",
+    "correct_answer": "option1",
+    "explanation": "Slicers provide easy interactive filtering."
+  },
+  {
+    "question": "Which chart is best for comparing categories? (Set2-Q10)",
+    "option1": "Line",
+    "option2": "Column",
+    "option3": "Pie",
+    "option4": "Area",
+    "correct_answer": "option2",
+    "explanation": "Column charts compare categories visually."
+  },
+  {
+    "question": "Which ToolPak option shows relationships between variables? (Set2-Q11)",
+    "option1": "Correlation",
+    "option2": "Histogram",
+    "option3": "Descriptive Statistics",
+    "option4": "ANOVA",
+    "correct_answer": "option1",
+    "explanation": "Correlation measures relationship strength."
+  },
+  {
+    "question": "Which ToolPak output includes mean and standard deviation? (Set2-Q12)",
+    "option1": "Histogram",
+    "option2": "ANOVA",
+    "option3": "Descriptive Statistics",
+    "option4": "Regression",
+    "correct_answer": "option3",
+    "explanation": "Descriptive statistics summarize dataset characteristics."
+  },
+  {
+    "question": "A negative correlation value indicates: (Set2-Q13)",
+    "option1": "No relationship",
+    "option2": "Variables move in opposite directions",
+    "option3": "Variables move together",
+    "option4": "Strong positive trend",
+    "correct_answer": "option2",
+    "explanation": "Negative correlation means variables move inversely."
+  },
+  {
+    "question": "Regression analysis is used to: (Set2-Q14)",
+    "option1": "Remove duplicates",
+    "option2": "Predict values",
+    "option3": "Filter data",
+    "option4": "Format charts",
+    "correct_answer": "option2",
+    "explanation": "Regression predicts outcomes using independent variables."
+  },
+  {
+    "question": "The slope in regression represents: (Set2-Q15)",
+    "option1": "Average value",
+    "option2": "Change in Y per unit change in X",
+    "option3": "Total variation",
+    "option4": "Correlation strength",
+    "correct_answer": "option2",
+    "explanation": "Slope measures how Y changes with X."
+  },
+  {
+    "question": "Which Excel formula finds the maximum value? (Set2-Q16)",
+    "option1": "LARGE",
+    "option2": "MAX",
+    "option3": "TOP",
+    "option4": "PEAK",
+    "correct_answer": "option2",
+    "explanation": "MAX returns the largest value."
+  },
+  {
+    "question": "Which chart displays frequency distribution? (Set2-Q17)",
+    "option1": "Histogram",
+    "option2": "Pie Chart",
+    "option3": "Line Chart",
+    "option4": "Scatter Chart",
+    "correct_answer": "option1",
+    "explanation": "Histograms show frequency of intervals."
+  },
+  {
+    "question": "Which function gives the current date and time? (Set2-Q18)",
+    "option1": "TODAY",
+    "option2": "NOW",
+    "option3": "DATE",
+    "option4": "TIME",
+    "correct_answer": "option2",
+    "explanation": "NOW returns date and time."
+  },
+  {
+    "question": "What does the TRIM function remove? (Set2-Q19)",
+    "option1": "Numbers",
+    "option2": "All spaces",
+    "option3": "Extra spaces",
+    "option4": "Formatting",
+    "correct_answer": "option3",
+    "explanation": "TRIM removes unnecessary spaces."
+  },
+  {
+    "question": "Which function returns TRUE if any condition is TRUE? (Set2-Q20)",
+    "option1": "AND",
+    "option2": "OR",
+    "option3": "NOT",
+    "option4": "XOR",
+    "correct_answer": "option2",
+    "explanation": "OR returns TRUE when any condition is met."
+  },
+  {
+    "question": "PivotTable \u2018Values\u2019 field usually contains: (Set2-Q21)",
+    "option1": "Text labels",
+    "option2": "Numeric summaries",
+    "option3": "Dates",
+    "option4": "Hyperlinks",
+    "correct_answer": "option2",
+    "explanation": "Values area stores summary calculations."
+  },
+  {
+    "question": "Which Excel feature can group dates into months automatically? (Set2-Q22)",
+    "option1": "Data Filter",
+    "option2": "Group Field",
+    "option3": "Format Cells",
+    "option4": "Goal Seek",
+    "correct_answer": "option2",
+    "explanation": "Group Field groups dates in PivotTables."
+  },
+  {
+    "question": "Which function finds the smallest value? (Set2-Q23)",
+    "option1": "MIN",
+    "option2": "SMALL",
+    "option3": "LOWEST",
+    "option4": "MINIMUM",
+    "correct_answer": "option1",
+    "explanation": "MIN returns lowest number."
+  },
+  {
+    "question": "Which function searches for approximate matches? (Set2-Q24)",
+    "option1": "VLOOKUP with TRUE",
+    "option2": "COUNTIF",
+    "option3": "SUMIF",
+    "option4": "MIN",
+    "correct_answer": "option1",
+    "explanation": "VLOOKUP TRUE enables approximate matching."
+  },
+  {
+    "question": "Which chart best displays relationships between two numeric variables? (Set2-Q25)",
+    "option1": "Pie Chart",
+    "option2": "Scatter Chart",
+    "option3": "Column Chart",
+    "option4": "Bar Chart",
+    "correct_answer": "option2",
+    "explanation": "Scatter plots show numeric relationships."
+  },
+  {
+    "question": "Which regression output measures model fit? (Set2-Q26)",
+    "option1": "Mean",
+    "option2": "Median",
+    "option3": "R-squared",
+    "option4": "Mode",
+    "correct_answer": "option3",
+    "explanation": "R\u00b2 indicates how well model explains variation."
+  },
+  {
+    "question": "Which function converts text to proper case? (Set2-Q27)",
+    "option1": "PROPER",
+    "option2": "UPPER",
+    "option3": "LOWER",
+    "option4": "FORMAT",
+    "correct_answer": "option1",
+    "explanation": "PROPER capitalizes first letters."
+  },
+  {
+    "question": "Which function counts blank cells? (Set2-Q28)",
+    "option1": "COUNT",
+    "option2": "COUNTA",
+    "option3": "COUNTBLANK",
+    "option4": "BLANKS",
+    "correct_answer": "option3",
+    "explanation": "COUNTBLANK counts empty cells."
+  },
+  {
+    "question": "What does the SUM function do in Excel? (Set2-Q29)",
+    "option1": "Counts numbers",
+    "option2": "Adds numbers",
+    "option3": "Averages numbers",
+    "option4": "Sorts numbers",
+    "correct_answer": "option2",
+    "explanation": "SUM adds a range of numbers."
+  },
+  {
+    "question": "Which function counts non-empty cells? (Set2-Q30)",
+    "option1": "COUNTBLANK",
+    "option2": "COUNT",
+    "option3": "COUNTA",
+    "option4": "AVERAGE",
+    "correct_answer": "option3",
+    "explanation": "COUNTA counts all non-empty cells."
+  },
+  {
+    "question": "What does the MID function do? (Set2-Q31)",
+    "option1": "Extracts characters from the start",
+    "option2": "Extracts characters from the middle",
+    "option3": "Extracts characters from the end",
+    "option4": "Converts text to uppercase",
+    "correct_answer": "option2",
+    "explanation": "MID extracts characters starting at a specific point."
+  },
+  {
+    "question": "Which function returns the number of characters in text? (Set2-Q32)",
+    "option1": "LENGTH",
+    "option2": "COUNT",
+    "option3": "LEN",
+    "option4": "TRIM",
+    "correct_answer": "option3",
+    "explanation": "LEN returns the total character count."
+  },
+  {
+    "question": "Which function checks multiple conditions and returns TRUE only if all conditions are met? (Set2-Q33)",
+    "option1": "OR",
+    "option2": "AND",
+    "option3": "NOT",
+    "option4": "XOR",
+    "correct_answer": "option2",
+    "explanation": "AND returns TRUE only when all conditions are TRUE."
+  },
+  {
+    "question": "Which lookup function searches horizontally? (Set2-Q34)",
+    "option1": "VLOOKUP",
+    "option2": "HLOOKUP",
+    "option3": "INDEX",
+    "option4": "MATCH",
+    "correct_answer": "option2",
+    "explanation": "HLOOKUP searches across rows."
+  },
+  {
+    "question": "What does INDEX return? (Set2-Q35)",
+    "option1": "A cell\u2019s position",
+    "option2": "A cell\u2019s value",
+    "option3": "A range address",
+    "option4": "A formula result",
+    "correct_answer": "option2",
+    "explanation": "INDEX returns the value at a given row/column."
+  },
+  {
+    "question": "A PivotChart is based on: (Set2-Q36)",
+    "option1": "A PivotTable",
+    "option2": "Conditional formatting",
+    "option3": "Macros",
+    "option4": "Named range",
+    "correct_answer": "option1",
+    "explanation": "PivotCharts visualize data from PivotTables."
+  },
+  {
+    "question": "Which tool lets you filter PivotTables visually? (Set2-Q37)",
+    "option1": "Slicer",
+    "option2": "Ribbon",
+    "option3": "Status bar",
+    "option4": "Formula bar",
+    "correct_answer": "option1",
+    "explanation": "Slicers provide easy interactive filtering."
+  },
+  {
+    "question": "Which chart is best for comparing categories? (Set2-Q38)",
+    "option1": "Line",
+    "option2": "Column",
+    "option3": "Pie",
+    "option4": "Area",
+    "correct_answer": "option2",
+    "explanation": "Column charts compare categories visually."
+  },
+  {
+    "question": "Which ToolPak option shows relationships between variables? (Set2-Q39)",
+    "option1": "Correlation",
+    "option2": "Histogram",
+    "option3": "Descriptive Statistics",
+    "option4": "ANOVA",
+    "correct_answer": "option1",
+    "explanation": "Correlation measures relationship strength."
+  },
+  {
+    "question": "Which ToolPak output includes mean and standard deviation? (Set2-Q40)",
+    "option1": "Histogram",
+    "option2": "ANOVA",
+    "option3": "Descriptive Statistics",
+    "option4": "Regression",
+    "correct_answer": "option3",
+    "explanation": "Descriptive statistics summarize dataset characteristics."
+  },
+  {
+    "question": "A negative correlation value indicates: (Set2-Q41)",
+    "option1": "No relationship",
+    "option2": "Variables move in opposite directions",
+    "option3": "Variables move together",
+    "option4": "Strong positive trend",
+    "correct_answer": "option2",
+    "explanation": "Negative correlation means variables move inversely."
+  },
+  {
+    "question": "Regression analysis is used to: (Set2-Q42)",
+    "option1": "Remove duplicates",
+    "option2": "Predict values",
+    "option3": "Filter data",
+    "option4": "Format charts",
+    "correct_answer": "option2",
+    "explanation": "Regression predicts outcomes using independent variables."
+  },
+  {
+    "question": "The slope in regression represents: (Set2-Q43)",
+    "option1": "Average value",
+    "option2": "Change in Y per unit change in X",
+    "option3": "Total variation",
+    "option4": "Correlation strength",
+    "correct_answer": "option2",
+    "explanation": "Slope measures how Y changes with X."
+  },
+  {
+    "question": "Which Excel formula finds the maximum value? (Set2-Q44)",
+    "option1": "LARGE",
+    "option2": "MAX",
+    "option3": "TOP",
+    "option4": "PEAK",
+    "correct_answer": "option2",
+    "explanation": "MAX returns the largest value."
+  },
+  {
+    "question": "Which chart displays frequency distribution? (Set2-Q45)",
+    "option1": "Histogram",
+    "option2": "Pie Chart",
+    "option3": "Line Chart",
+    "option4": "Scatter Chart",
+    "correct_answer": "option1",
+    "explanation": "Histograms show frequency of intervals."
+  },
+  {
+    "question": "Which function gives the current date and time? (Set2-Q46)",
+    "option1": "TODAY",
+    "option2": "NOW",
+    "option3": "DATE",
+    "option4": "TIME",
+    "correct_answer": "option2",
+    "explanation": "NOW returns date and time."
+  },
+  {
+    "question": "What does the TRIM function remove? (Set2-Q47)",
+    "option1": "Numbers",
+    "option2": "All spaces",
+    "option3": "Extra spaces",
+    "option4": "Formatting",
+    "correct_answer": "option3",
+    "explanation": "TRIM removes unnecessary spaces."
+  },
+  {
+    "question": "Which function returns TRUE if any condition is TRUE? (Set2-Q48)",
+    "option1": "AND",
+    "option2": "OR",
+    "option3": "NOT",
+    "option4": "XOR",
+    "correct_answer": "option2",
+    "explanation": "OR returns TRUE when any condition is met."
+  },
+  {
+    "question": "PivotTable \u2018Values\u2019 field usually contains: (Set2-Q49)",
+    "option1": "Text labels",
+    "option2": "Numeric summaries",
+    "option3": "Dates",
+    "option4": "Hyperlinks",
+    "correct_answer": "option2",
+    "explanation": "Values area stores summary calculations."
+  },
+  {
+    "question": "Which Excel feature can group dates into months automatically? (Set2-Q50)",
+    "option1": "Data Filter",
+    "option2": "Group Field",
+    "option3": "Format Cells",
+    "option4": "Goal Seek",
+    "correct_answer": "option2",
+    "explanation": "Group Field groups dates in PivotTables."
+  },
+  {
+    "question": "Which function finds the smallest value? (Set2-Q51)",
+    "option1": "MIN",
+    "option2": "SMALL",
+    "option3": "LOWEST",
+    "option4": "MINIMUM",
+    "correct_answer": "option1",
+    "explanation": "MIN returns lowest number."
+  },
+  {
+    "question": "Which function searches for approximate matches? (Set2-Q52)",
+    "option1": "VLOOKUP with TRUE",
+    "option2": "COUNTIF",
+    "option3": "SUMIF",
+    "option4": "MIN",
+    "correct_answer": "option1",
+    "explanation": "VLOOKUP TRUE enables approximate matching."
+  },
+  {
+    "question": "Which chart best displays relationships between two numeric variables? (Set2-Q53)",
+    "option1": "Pie Chart",
+    "option2": "Scatter Chart",
+    "option3": "Column Chart",
+    "option4": "Bar Chart",
+    "correct_answer": "option2",
+    "explanation": "Scatter plots show numeric relationships."
+  },
+  {
+    "question": "Which regression output measures model fit? (Set2-Q54)",
+    "option1": "Mean",
+    "option2": "Median",
+    "option3": "R-squared",
+    "option4": "Mode",
+    "correct_answer": "option3",
+    "explanation": "R\u00b2 indicates how well model explains variation."
+  },
+  {
+    "question": "Which function converts text to proper case? (Set2-Q55)",
+    "option1": "PROPER",
+    "option2": "UPPER",
+    "option3": "LOWER",
+    "option4": "FORMAT",
+    "correct_answer": "option1",
+    "explanation": "PROPER capitalizes first letters."
+  },
+  {
+    "question": "Which function counts blank cells? (Set2-Q56)",
+    "option1": "COUNT",
+    "option2": "COUNTA",
+    "option3": "COUNTBLANK",
+    "option4": "BLANKS",
+    "correct_answer": "option3",
+    "explanation": "COUNTBLANK counts empty cells."
+  },
+  {
+    "question": "What does the SUM function do in Excel? (Set2-Q57)",
+    "option1": "Counts numbers",
+    "option2": "Adds numbers",
+    "option3": "Averages numbers",
+    "option4": "Sorts numbers",
+    "correct_answer": "option2",
+    "explanation": "SUM adds a range of numbers."
+  },
+  {
+    "question": "Which function counts non-empty cells? (Set2-Q58)",
+    "option1": "COUNTBLANK",
+    "option2": "COUNT",
+    "option3": "COUNTA",
+    "option4": "AVERAGE",
+    "correct_answer": "option3",
+    "explanation": "COUNTA counts all non-empty cells."
+  },
+  {
+    "question": "What does the MID function do? (Set2-Q59)",
+    "option1": "Extracts characters from the start",
+    "option2": "Extracts characters from the middle",
+    "option3": "Extracts characters from the end",
+    "option4": "Converts text to uppercase",
+    "correct_answer": "option2",
+    "explanation": "MID extracts characters starting at a specific point."
+  },
+  {
+    "question": "Which function returns the number of characters in text? (Set2-Q60)",
+    "option1": "LENGTH",
+    "option2": "COUNT",
+    "option3": "LEN",
+    "option4": "TRIM",
+    "correct_answer": "option3",
+    "explanation": "LEN returns the total character count."
+  },
+  {
+    "question": "Which function checks multiple conditions and returns TRUE only if all conditions are met? (Set2-Q61)",
+    "option1": "OR",
+    "option2": "AND",
+    "option3": "NOT",
+    "option4": "XOR",
+    "correct_answer": "option2",
+    "explanation": "AND returns TRUE only when all conditions are TRUE."
+  },
+  {
+    "question": "Which lookup function searches horizontally? (Set2-Q62)",
+    "option1": "VLOOKUP",
+    "option2": "HLOOKUP",
+    "option3": "INDEX",
+    "option4": "MATCH",
+    "correct_answer": "option2",
+    "explanation": "HLOOKUP searches across rows."
+  },
+  {
+    "question": "What does INDEX return? (Set2-Q63)",
+    "option1": "A cell\u2019s position",
+    "option2": "A cell\u2019s value",
+    "option3": "A range address",
+    "option4": "A formula result",
+    "correct_answer": "option2",
+    "explanation": "INDEX returns the value at a given row/column."
+  },
+  {
+    "question": "A PivotChart is based on: (Set2-Q64)",
+    "option1": "A PivotTable",
+    "option2": "Conditional formatting",
+    "option3": "Macros",
+    "option4": "Named range",
+    "correct_answer": "option1",
+    "explanation": "PivotCharts visualize data from PivotTables."
+  },
+  {
+    "question": "Which tool lets you filter PivotTables visually? (Set2-Q65)",
+    "option1": "Slicer",
+    "option2": "Ribbon",
+    "option3": "Status bar",
+    "option4": "Formula bar",
+    "correct_answer": "option1",
+    "explanation": "Slicers provide easy interactive filtering."
+  },
+  {
+    "question": "Which chart is best for comparing categories? (Set2-Q66)",
+    "option1": "Line",
+    "option2": "Column",
+    "option3": "Pie",
+    "option4": "Area",
+    "correct_answer": "option2",
+    "explanation": "Column charts compare categories visually."
+  },
+  {
+    "question": "Which ToolPak option shows relationships between variables? (Set2-Q67)",
+    "option1": "Correlation",
+    "option2": "Histogram",
+    "option3": "Descriptive Statistics",
+    "option4": "ANOVA",
+    "correct_answer": "option1",
+    "explanation": "Correlation measures relationship strength."
+  },
+  {
+    "question": "Which ToolPak output includes mean and standard deviation? (Set2-Q68)",
+    "option1": "Histogram",
+    "option2": "ANOVA",
+    "option3": "Descriptive Statistics",
+    "option4": "Regression",
+    "correct_answer": "option3",
+    "explanation": "Descriptive statistics summarize dataset characteristics."
+  },
+  {
+    "question": "A negative correlation value indicates: (Set2-Q69)",
+    "option1": "No relationship",
+    "option2": "Variables move in opposite directions",
+    "option3": "Variables move together",
+    "option4": "Strong positive trend",
+    "correct_answer": "option2",
+    "explanation": "Negative correlation means variables move inversely."
+  },
+  {
+    "question": "Regression analysis is used to: (Set2-Q70)",
+    "option1": "Remove duplicates",
+    "option2": "Predict values",
+    "option3": "Filter data",
+    "option4": "Format charts",
+    "correct_answer": "option2",
+    "explanation": "Regression predicts outcomes using independent variables."
+  },
+  {
+    "question": "The slope in regression represents: (Set2-Q71)",
+    "option1": "Average value",
+    "option2": "Change in Y per unit change in X",
+    "option3": "Total variation",
+    "option4": "Correlation strength",
+    "correct_answer": "option2",
+    "explanation": "Slope measures how Y changes with X."
+  },
+  {
+    "question": "Which Excel formula finds the maximum value? (Set2-Q72)",
+    "option1": "LARGE",
+    "option2": "MAX",
+    "option3": "TOP",
+    "option4": "PEAK",
+    "correct_answer": "option2",
+    "explanation": "MAX returns the largest value."
+  },
+  {
+    "question": "Which chart displays frequency distribution? (Set2-Q73)",
+    "option1": "Histogram",
+    "option2": "Pie Chart",
+    "option3": "Line Chart",
+    "option4": "Scatter Chart",
+    "correct_answer": "option1",
+    "explanation": "Histograms show frequency of intervals."
+  },
+  {
+    "question": "Which function gives the current date and time? (Set2-Q74)",
+    "option1": "TODAY",
+    "option2": "NOW",
+    "option3": "DATE",
+    "option4": "TIME",
+    "correct_answer": "option2",
+    "explanation": "NOW returns date and time."
+  },
+  {
+    "question": "What does the TRIM function remove? (Set2-Q75)",
+    "option1": "Numbers",
+    "option2": "All spaces",
+    "option3": "Extra spaces",
+    "option4": "Formatting",
+    "correct_answer": "option3",
+    "explanation": "TRIM removes unnecessary spaces."
+  },
+  {
+    "question": "Which function returns TRUE if any condition is TRUE? (Set2-Q76)",
+    "option1": "AND",
+    "option2": "OR",
+    "option3": "NOT",
+    "option4": "XOR",
+    "correct_answer": "option2",
+    "explanation": "OR returns TRUE when any condition is met."
+  },
+  {
+    "question": "PivotTable \u2018Values\u2019 field usually contains: (Set2-Q77)",
+    "option1": "Text labels",
+    "option2": "Numeric summaries",
+    "option3": "Dates",
+    "option4": "Hyperlinks",
+    "correct_answer": "option2",
+    "explanation": "Values area stores summary calculations."
+  },
+  {
+    "question": "Which Excel feature can group dates into months automatically? (Set2-Q78)",
+    "option1": "Data Filter",
+    "option2": "Group Field",
+    "option3": "Format Cells",
+    "option4": "Goal Seek",
+    "correct_answer": "option2",
+    "explanation": "Group Field groups dates in PivotTables."
+  },
+  {
+    "question": "Which function finds the smallest value? (Set2-Q79)",
+    "option1": "MIN",
+    "option2": "SMALL",
+    "option3": "LOWEST",
+    "option4": "MINIMUM",
+    "correct_answer": "option1",
+    "explanation": "MIN returns lowest number."
+  },
+  {
+    "question": "Which function searches for approximate matches? (Set2-Q80)",
+    "option1": "VLOOKUP with TRUE",
+    "option2": "COUNTIF",
+    "option3": "SUMIF",
+    "option4": "MIN",
+    "correct_answer": "option1",
+    "explanation": "VLOOKUP TRUE enables approximate matching."
+  },
+  {
+    "question": "Which chart best displays relationships between two numeric variables? (Set2-Q81)",
+    "option1": "Pie Chart",
+    "option2": "Scatter Chart",
+    "option3": "Column Chart",
+    "option4": "Bar Chart",
+    "correct_answer": "option2",
+    "explanation": "Scatter plots show numeric relationships."
+  },
+  {
+    "question": "Which regression output measures model fit? (Set2-Q82)",
+    "option1": "Mean",
+    "option2": "Median",
+    "option3": "R-squared",
+    "option4": "Mode",
+    "correct_answer": "option3",
+    "explanation": "R\u00b2 indicates how well model explains variation."
+  },
+  {
+    "question": "Which function converts text to proper case? (Set2-Q83)",
+    "option1": "PROPER",
+    "option2": "UPPER",
+    "option3": "LOWER",
+    "option4": "FORMAT",
+    "correct_answer": "option1",
+    "explanation": "PROPER capitalizes first letters."
+  },
+  {
+    "question": "Which function counts blank cells? (Set2-Q84)",
+    "option1": "COUNT",
+    "option2": "COUNTA",
+    "option3": "COUNTBLANK",
+    "option4": "BLANKS",
+    "correct_answer": "option3",
+    "explanation": "COUNTBLANK counts empty cells."
+  },
+  {
+    "question": "What does the SUM function do in Excel? (Set2-Q85)",
+    "option1": "Counts numbers",
+    "option2": "Adds numbers",
+    "option3": "Averages numbers",
+    "option4": "Sorts numbers",
+    "correct_answer": "option2",
+    "explanation": "SUM adds a range of numbers."
+  },
+  {
+    "question": "Which function counts non-empty cells? (Set2-Q86)",
+    "option1": "COUNTBLANK",
+    "option2": "COUNT",
+    "option3": "COUNTA",
+    "option4": "AVERAGE",
+    "correct_answer": "option3",
+    "explanation": "COUNTA counts all non-empty cells."
+  },
+  {
+    "question": "What does the MID function do? (Set2-Q87)",
+    "option1": "Extracts characters from the start",
+    "option2": "Extracts characters from the middle",
+    "option3": "Extracts characters from the end",
+    "option4": "Converts text to uppercase",
+    "correct_answer": "option2",
+    "explanation": "MID extracts characters starting at a specific point."
+  },
+  {
+    "question": "Which function returns the number of characters in text? (Set2-Q88)",
+    "option1": "LENGTH",
+    "option2": "COUNT",
+    "option3": "LEN",
+    "option4": "TRIM",
+    "correct_answer": "option3",
+    "explanation": "LEN returns the total character count."
+  },
+  {
+    "question": "Which function checks multiple conditions and returns TRUE only if all conditions are met? (Set2-Q89)",
+    "option1": "OR",
+    "option2": "AND",
+    "option3": "NOT",
+    "option4": "XOR",
+    "correct_answer": "option2",
+    "explanation": "AND returns TRUE only when all conditions are TRUE."
+  },
+  {
+    "question": "Which lookup function searches horizontally? (Set2-Q90)",
+    "option1": "VLOOKUP",
+    "option2": "HLOOKUP",
+    "option3": "INDEX",
+    "option4": "MATCH",
+    "correct_answer": "option2",
+    "explanation": "HLOOKUP searches across rows."
+  },
+  {
+    "question": "What does INDEX return? (Set2-Q91)",
+    "option1": "A cell\u2019s position",
+    "option2": "A cell\u2019s value",
+    "option3": "A range address",
+    "option4": "A formula result",
+    "correct_answer": "option2",
+    "explanation": "INDEX returns the value at a given row/column."
+  },
+  {
+    "question": "A PivotChart is based on: (Set2-Q92)",
+    "option1": "A PivotTable",
+    "option2": "Conditional formatting",
+    "option3": "Macros",
+    "option4": "Named range",
+    "correct_answer": "option1",
+    "explanation": "PivotCharts visualize data from PivotTables."
+  },
+  {
+    "question": "Which tool lets you filter PivotTables visually? (Set2-Q93)",
+    "option1": "Slicer",
+    "option2": "Ribbon",
+    "option3": "Status bar",
+    "option4": "Formula bar",
+    "correct_answer": "option1",
+    "explanation": "Slicers provide easy interactive filtering."
+  },
+  {
+    "question": "Which chart is best for comparing categories? (Set2-Q94)",
+    "option1": "Line",
+    "option2": "Column",
+    "option3": "Pie",
+    "option4": "Area",
+    "correct_answer": "option2",
+    "explanation": "Column charts compare categories visually."
+  },
+  {
+    "question": "Which ToolPak option shows relationships between variables? (Set2-Q95)",
+    "option1": "Correlation",
+    "option2": "Histogram",
+    "option3": "Descriptive Statistics",
+    "option4": "ANOVA",
+    "correct_answer": "option1",
+    "explanation": "Correlation measures relationship strength."
+  },
+  {
+    "question": "Which ToolPak output includes mean and standard deviation? (Set2-Q96)",
+    "option1": "Histogram",
+    "option2": "ANOVA",
+    "option3": "Descriptive Statistics",
+    "option4": "Regression",
+    "correct_answer": "option3",
+    "explanation": "Descriptive statistics summarize dataset characteristics."
+  },
+  {
+    "question": "A negative correlation value indicates: (Set2-Q97)",
+    "option1": "No relationship",
+    "option2": "Variables move in opposite directions",
+    "option3": "Variables move together",
+    "option4": "Strong positive trend",
+    "correct_answer": "option2",
+    "explanation": "Negative correlation means variables move inversely."
+  },
+  {
+    "question": "Regression analysis is used to: (Set2-Q98)",
+    "option1": "Remove duplicates",
+    "option2": "Predict values",
+    "option3": "Filter data",
+    "option4": "Format charts",
+    "correct_answer": "option2",
+    "explanation": "Regression predicts outcomes using independent variables."
+  },
+  {
+    "question": "The slope in regression represents: (Set2-Q99)",
+    "option1": "Average value",
+    "option2": "Change in Y per unit change in X",
+    "option3": "Total variation",
+    "option4": "Correlation strength",
+    "correct_answer": "option2",
+    "explanation": "Slope measures how Y changes with X."
+  },
+  {
+    "question": "Which Excel formula finds the maximum value? (Set2-Q100)",
+    "option1": "LARGE",
+    "option2": "MAX",
+    "option3": "TOP",
+    "option4": "PEAK",
+    "correct_answer": "option2",
+    "explanation": "MAX returns the largest value."
+  }
+];
+
+  const container = document.getElementById('questions');
+
+  data.forEach((q, idx) => {
+    const card = document.createElement('div');
+    card.className = `backdrop-blur-xl bg-white/10 p-6 rounded-3xl shadow-2xl border border-white/20 hover:bg-white/20 transition duration-300 pop-in`;
+
+    // QUESTION
+    const question = document.createElement('h2');
+    question.className = "text-2xl font-bold mb-4 tracking-tight";
+    question.textContent = `${idx + 1}. ${q.question}`;
+    card.appendChild(question);
+
+    // OPTIONS
+    const optionsWrapper = document.createElement('div');
+    optionsWrapper.className = "space-y-3";
+
+    Object.keys(q).forEach(key => {
+      if (key.startsWith('option')) {
+        const btn = document.createElement('button');
+        btn.className = `w-full p-4 rounded-2xl bg-white/5 border border-white/10
+          hover:bg-white/20 hover:scale-[1.02] transition duration-200
+          text-left shadow-md`;
+        btn.textContent = q[key];
+
+        btn.onclick = () => {
+          const correct = q[q.correct_answer];
+
+          if (btn.textContent === correct) {
+            btn.classList.add("bg-green-500/30", "border-green-400", "scale-[1.03]", "shadow-green-500/40");
+          } else {
+            btn.classList.add("bg-red-500/30", "border-red-400", "scale-[1.03]", "shadow-red-500/40");
+          }
+
+          explanation.classList.remove("hidden");
+          explanation.classList.add("float-up");
+        };
+
+        optionsWrapper.appendChild(btn);
+      }
+    });
+
+    card.appendChild(optionsWrapper);
+
+    // EXPLANATION
+    const explanation = document.createElement('div');
+    explanation.className = `hidden mt-5 p-4 rounded-2xl bg-indigo-500/20 border-l-4 border-indigo-400 text-indigo-200 shadow-md`;
+    explanation.textContent = q.explanation;
+    card.appendChild(explanation);
+
+    container.appendChild(card);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>PG-DBDA CCEE Prep | Home</title>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            float: "float 3s ease-in-out infinite",
+            glow: "glow 2s ease-in-out infinite",
+            pop: "pop .4s ease forwards",
+          },
+          keyframes: {
+            float: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-10px)" } },
+            glow: { "0%,100%": { filter: "drop-shadow(0 0 5px #00eaff)" }, "50%": { filter: "drop-shadow(0 0 15px #00eaff)" } },
+            pop: { "0%": { opacity: 0, transform: "scale(.8)" }, "100%": { opacity: 1, transform: "scale(1)" } }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#0f3460] text-white p-6 overflow-x-hidden">
+
+  <div class="absolute top-16 left-24 w-10 h-10 bg-cyan-400 rounded-full opacity-30 blur-xl animate-float"></div>
+  <div class="absolute bottom-20 right-32 w-14 h-14 bg-pink-500 rounded-full opacity-30 blur-xl animate-float"></div>
+
+  <div class="max-w-5xl mx-auto mt-10 space-y-14 animate-pop">
+
+    <h1 class="text-6xl font-extrabold text-center tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#00eaff] to-[#ff0099] drop-shadow-xl animate-glow">
+      PG-DBDA CCEE Practice Portal
+    </h1>
+
+    <p class="text-center text-xl text-gray-300 max-w-3xl mx-auto">
+      Prepare for CDAC's CCEE Examination with curated subject-wise MCQs, powerful explanations, and a futuristic interface.
+      Choose a subject below and start practicing.
+    </p>
+
+    <!-- SUBJECT GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Linux Programming and Cloud Computing -->
+      <div class="backdrop-blur-2xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition duration-300">
+        <h2 class="text-2xl font-bold text-cyan-300">Linux Programming & Cloud Computing</h2>
+        <p class="mt-3 text-gray-300">OS fundamentals, Linux commands, shell scripting, cloud concepts.</p>
+        <a href="mcq.html" class="mt-4 inline-block px-4 py-2 bg-cyan-500 hover:bg-cyan-400 rounded-xl font-semibold">Practice MCQ</a>
+      </div>
+
+      <!-- Python and R Programming -->
+      <div class="backdrop-blur-2xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition duration-300">
+        <h2 class="text-2xl font-bold text-pink-300">Python & R Programming</h2>
+        <p class="mt-3 text-gray-300">Data manipulation, statistical analysis, scripting, libraries.</p>
+        <a href="mcq.html" class="mt-4 inline-block px-4 py-2 bg-pink-500 hover:bg-pink-400 rounded-xl font-semibold">Practice MCQ</a>
+      </div>
+
+      <!-- Java OOP -->
+      <div class="backdrop-blur-2xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition duration-300">
+        <h2 class="text-2xl font-bold text-purple-300">Object Oriented Programming with Java</h2>
+        <p class="mt-3 text-gray-300">OOP concepts, classes, inheritance, interfaces, collections.</p>
+        <a href="mcq.html" class="mt-4 inline-block px-4 py-2 bg-purple-500 hover:bg-purple-400 rounded-xl font-semibold">Practice MCQ</a>
+      </div>
+
+      <!-- Statistics -->
+      <div class="backdrop-blur-2xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition duration-300">
+        <h2 class="text-2xl font-bold text-green-300">Advanced Analytics using Statistics</h2>
+        <p class="mt-3 text-gray-300">Hypothesis testing, distributions, regression, statistical modeling.</p>
+        <a href="mcq.html" class="mt-4 inline-block px-4 py-2 bg-green-500 hover:bg-green-400 rounded-xl font-semibold">Practice MCQ</a>
+      </div>
+
+      <!-- DBMS -->
+      <div class="backdrop-blur-2xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition duration-300">
+        <h2 class="text-2xl font-bold text-yellow-300">Data Collection & DBMS</h2>
+        <p class="mt-3 text-gray-300">SQL, ER diagrams, ACID, transactions, indexing, normalization.</p>
+        <a href="mcq.html" class="mt-4 inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-400 rounded-xl font-semibold">Practice MCQ</a>
+      </div>
+
+      <!-- Big Data -->
+      <div class="backdrop-blur-2xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition duration-300">
+        <h2 class="text-2xl font-bold text-red-300">Big Data Technologies</h2>
+        <p class="mt-3 text-gray-300">Hadoop, HDFS, MapReduce, Spark basics, distributed systems.</p>
+        <a href="mcq.html" class="mt-4 inline-block px-4 py-2 bg-red-500 hover:bg-red-400 rounded-xl font-semibold">Practice MCQ</a>
+      </div>
+
+      <!-- Data Visualization -->
+      <div class="backdrop-blur-2xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition duration-300">
+        <h2 class="text-2xl font-bold text-blue-300">Data Visualization & Reporting</h2>
+        <p class="mt-3 text-gray-300">Dashboards, charts, reporting tools, visual storytelling.</p>
+        <a href="mcq.html" class="mt-4 inline-block px-4 py-2 bg-blue-500 hover:bg-blue-400 rounded-xl font-semibold">Practice MCQ</a>
+      </div>
+
+      <!-- Machine Learning -->
+      <div class="backdrop-blur-2xl bg-white/10 p-6 rounded-3xl border border-white/20 shadow-lg hover:shadow-2xl hover:scale-[1.03] transition duration-300">
+        <h2 class="text-2xl font-bold text-orange-300">Practical Machine Learning</h2>
+        <p class="mt-3 text-gray-300">Supervised/unsupervised ML, models, evaluation, pipelines.</p>
+        <a href="mcq.html" class="mt-4 inline-block px-4 py-2 bg-orange-500 hover:bg-orange-400 rounded-xl font-semibold">Practice MCQ</a>
+      </div>
+
+    </div>
+
+    <footer class="text-center text-gray-400 mt-10">
+      Designed for <span class="text-cyan-300 font-bold">PG-DBDA Students</span> | CDAC CCEE Prep Portal
+    </footer>
+  </div>
+
+</body>
+</html>
